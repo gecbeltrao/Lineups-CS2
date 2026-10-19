@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lineups de Granada CS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070a07; --panel:#0e150e; --panel2:#142014; --line:#26391f;
+  --green:#6fae3b; --green-d:#3f6b24; --text:#dfe8d5; --mute:#8fa282;
+  --tr:#d9a441; --ct:#4a8fd6; --warn:#c8553d;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',system-ui,sans-serif;font-size:17px;line-height:1.35;
+  background-image:repeating-linear-gradient(135deg,rgba(111,174,59,.035) 0 2px,transparent 2px 14px)}
+header{padding:22px 16px 14px;border-bottom:2px solid var(--green-d);max-width:900px;margin:auto}
+h1{font-family:'Black Ops One','Impact',sans-serif;font-weight:400;font-size:clamp(28px,8vw,48px);letter-spacing:1px;color:var(--green);text-transform:uppercase}
+h1 span{color:var(--text)}
+.sub{color:var(--mute);margin-top:6px;font-weight:600}
+nav{position:sticky;top:0;z-index:5;background:rgba(7,10,7,.96);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:6px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding:10px 24px;max-width:900px;margin:auto;scrollbar-width:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 20px,#000 calc(100% - 20px),transparent);mask-image:linear-gradient(90deg,transparent,#000 20px,#000 calc(100% - 20px),transparent)}
+.tabs::-webkit-scrollbar{display:none}
+.tabs{user-select:none;-webkit-user-select:none}
+.arr{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:30px;height:38px;border:0;background:none;color:var(--green);
+  font:700 30px/1 'Rajdhani',sans-serif;cursor:pointer;transition:opacity .2s;padding:0}
+.arr.l{left:0}.arr.r{right:0;animation:nudge 1.2s ease-in-out infinite}
+.arr.off{opacity:0;pointer-events:none}
+@keyframes nudge{0%,100%{transform:translate(0,-50%)}50%{transform:translate(-5px,-50%)}}
+@media(prefers-reduced-motion:reduce){.arr.r{animation:none}}
+.tab{flex:none;scroll-snap-align:center;font:inherit;font-weight:700;font-size:16px;letter-spacing:.5px;text-transform:uppercase;color:var(--mute);background:var(--panel);
+  border:1px solid var(--line);padding:9px 18px;cursor:pointer;white-space:nowrap;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.tab[aria-selected=true]{background:var(--green);color:#071007;border-color:var(--green)}
+main{max-width:900px;margin:auto;padding:16px}
+.banner{height:120px;border:2px dashed var(--green-d);background:linear-gradient(135deg,var(--panel2),var(--panel));display:flex;align-items:center;justify-content:center;
+  color:var(--mute);text-transform:uppercase;letter-spacing:2px;font-weight:700;font-size:14px;text-align:center;padding:8px;position:relative;overflow:hidden}
+.banner img,.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.mapname{font-family:'Black Ops One',Impact,sans-serif;font-size:30px;color:var(--green);margin:14px 0 4px;text-transform:uppercase}
+.gtabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 6px}
+.gtab{font:inherit;font-weight:700;text-transform:uppercase;border:1px solid var(--line);background:var(--panel);color:var(--mute);padding:7px 12px;cursor:pointer}
+.gtab[aria-pressed=true]{border-color:var(--green);color:var(--green)}
+section.gr{margin-top:22px}
+section.gr h2{font-family:'Black Ops One',Impact,sans-serif;font-weight:400;font-size:22px;text-transform:uppercase;display:flex;align-items:center;gap:10px;
+  padding-bottom:6px;border-bottom:2px solid var(--green-d)}
+section.gr h2 i{width:12px;height:12px;display:inline-block;transform:rotate(45deg)}
+.card{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--green);margin-top:14px;overflow:hidden}
+.card header{padding:12px 14px;border:0;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;max-width:none;background:var(--panel2)}
+.card h3{font-size:21px;text-transform:uppercase;letter-spacing:.5px;line-height:1.1}
+.badges{display:flex;gap:6px;flex:none;flex-wrap:wrap;justify-content:flex-end}
+.b{font-size:13px;font-weight:700;padding:2px 8px;letter-spacing:1px;text-transform:uppercase;border:1px solid}
+.b.TR{color:var(--tr);border-color:var(--tr)} .b.CT{color:var(--ct);border-color:var(--ct)}
+.b.ex{color:var(--warn);border-color:var(--warn)}
+.shot{aspect-ratio:16/9;margin:12px 14px 0;border:2px dashed var(--green-d);background:#0a100a;display:flex;align-items:center;justify-content:center;
+  color:var(--mute);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;font-size:13px;text-align:center;padding:8px;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:24px 24px}
+dl{padding:12px 14px 14px;display:grid;grid-template-columns:1fr;gap:9px}
+dl div{border-top:1px solid var(--line);padding-top:7px}
+dt{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:700}
+dd{margin-top:1px}
+@media(min-width:640px){dl{grid-template-columns:1fr 1fr}.shot{margin:14px}}
+footer{max-width:900px;margin:30px auto;padding:0 16px;color:var(--mute);font-size:14px}
+code{color:var(--green)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Lineups <span>de Granada</span></h1>
+  <p class="sub">Smokes, flashes, molotovs e HEs mapa a mapa: de onde jogar, onde mirar e para que serve cada um.</p>
+</header>
+<nav><button class="arr l" id="arrL" aria-label="Mapas anteriores">‹</button><div class="tabs" id="mapTabs" role="tablist" aria-label="Mapas"></div><button class="arr r" id="arrR" aria-label="Mais mapas">›</button></nav>
+<main id="app"></main>
+<footer>
+  Todo o conteúdo marcado como <b>EXEMPLO</b> é provisório. Edite o objeto <code>LINEUPS</code> no final do arquivo
+  e use <code>img: "caminho.jpg"</code> para a captura de cada lineup e <code>MAPAS[i].img</code> para a foto do mapa.
+</footer>
+
+<script>
+/* ====== DADOS — edite aqui ====== */
+const GRANADAS = [
+  {id:'smoke', nome:'Smoke',     cor:'#9fb0a0'},
+  {id:'flash', nome:'Flash',     cor:'#e8d44d'},
+  {id:'molly', nome:'Molotov',   cor:'#d9622b'},
+  {id:'he',    nome:'HE',        cor:'#c8553d'}
+];
+// img: coloque o caminho/URL da foto do mapa (deixe '' para o placeholder)
+const MAPAS = [
+  {id:'mirage',   nome:'Mirage',   img:''},
+  {id:'inferno',  nome:'Inferno',  img:''},
+  {id:'dust2',    nome:'Dust II',  img:''},
+  {id:'nuke',     nome:'Nuke',     img:''},
+  {id:'cache',    nome:'Cache',    img:''},
+  {id:'ancient',  nome:'Ancient',  img:''},
+  {id:'anubis',   nome:'Anubis',   img:''},
+  {id:'overpass', nome:'Overpass', img:''},
+  {id:'train',    nome:'Train',    img:''},
+  {id:'vertigo',  nome:'Vertigo',  img:''}
+];
+const TECNICAS = ['Clique esquerdo','Clique direito','Esquerdo + direito','Jump throw','Corrida + jump throw'];
+
+// Modelo de lineup (campos: nome, posicao, mira, alvo, tecnica, lado, uso, img, exemplo)
+const EXEMPLOS = {
+  smoke:{nome:'Smoke do conector da A',   posicao:'Spawn TR, junto à parede esquerda', mira:'Quina da torre ao fundo, um dedo acima do telhado',
+         alvo:'Cai no conector e bloqueia a visão do meio', tecnica:TECNICAS[3], lado:'TR', uso:'Fechar a visão do meio para entrar no bomb A'},
+  flash:{nome:'Flash para entrada do bomb',posicao:'Atrás da caixa, perto da rampa', mira:'Ponto alto da parede, mira no canto do céu',
+         alvo:'Explode sobre a entrada do bomb', tecnica:TECNICAS[1], lado:'TR', uso:'Cegar defensores antes de entrar'},
+  molly:{nome:'Molotov da escada',         posicao:'Esquina da rampa CT', mira:'Marca na viga acima da porta',
+         alvo:'Cai no topo da escada', tecnica:TECNICAS[2], lado:'CT', uso:'Tirar o inimigo da escada'},
+  he:   {nome:'HE do spawn inimigo',       posicao:'Fundo do corredor longo', mira:'Letra da pichação na parede',
+         alvo:'Cai na saída do spawn', tecnica:TECNICAS[4], lado:'CT', uso:'Dar dano no rush inicial'}
+};
+// Exemplos variados por mapa: [nome, posição, mira, alvo, técnica(0-4 de TECNICAS), lado, uso]
+const EX_MAPA = {
+  mirage:{
+    smoke:['Smoke da janela do meio','Spawn TR, ao lado da caixa verde','Antena torta acima do prédio, mira um pouco à esquerda','Cai na janela e corta o ângulo do AWP',3,'TR','Cortar o AWP do meio antes de ir para o bomb A'],
+    flash:['Flash pop da rampa','Dentro da rampa, colado na parede','Parede do fundo, uma mira acima da quina','Explode sobre o ninho do bomb',1,'TR','Cegar quem segura o ângulo longo'],
+    molly:['Molotov do ninja','Escada do conector, canto esquerdo','Ponto claro da pichação na parede','Cobre o spot atrás da caixa',2,'TR','Tirar o defensor que desfaz o bomb'],
+    he:['HE no spawn da escada','Quina do corredor, perto do portão','Ponta da lâmpada do teto','Cai na saída da escada',0,'CT','Dar dano no rush de entrada']},
+  inferno:{
+    smoke:['Smoke do cotovelo','Banana, atrás do carro azul','Galho mais alto da árvore, mira à direita','Bloqueia a passagem do cotovelo',4,'TR','Isolar o bomb B do apoio CT'],
+    flash:['Flash do barril','Início da banana, junto ao barril','Parte baixa da placa de madeira','Explode no ângulo do carro',0,'TR','Abrir a banana sem tomar dano'],
+    molly:['Molotov da varanda','Apartamentos, na lateral da porta','Telhado da casa em frente, mira no canto','Cai sobre a varanda e queima o spot',2,'TR','Expulsar o defensor da varanda'],
+    he:['HE do arco','Nas escadas do arco, no meio','Ponto da fiação elétrica no alto','Cai atrás do pilar central',1,'CT','Danificar quem tenta plantar']},
+  dust2:{
+    smoke:['Smoke da porta longa','Spawn TR, no meio do corredor','Ponta do minarete, mira um dedo abaixo','Fecha a porta e a visão da A longa',3,'TR','Subir a A longa sem ser visto'],
+    flash:['Flash do túnel','Saída do túnel, rente à parede direita','Linha do telhado cinza, mira bem alta','Explode no ângulo do meio',1,'TR','Cegar o defensor do túnel superior'],
+    molly:['Molotov do alvo B','Janela do B, canto esquerdo','Mira no centro da caixa de madeira','Queima o ponto de plant',2,'TR','Tirar o inimigo do ponto de plant do B'],
+    he:['HE da curva do meio','Meio, junto à porta dupla','Topo da pilastra à esquerda','Cai na curva do meio',4,'CT','Pressionar a rotação do TR']},
+  nuke:{
+    smoke:['Smoke do exterior','Saída do spawn TR, perto do silo','Ponta da torre de ventilação, mira alta','Fecha a visão do exterior',3,'TR','Atravessar o exterior com segurança'],
+    flash:['Flash da rampa','Topo da rampa, junto ao rack','Canto do teto em cima da porta','Explode na entrada do bomb de baixo',0,'CT','Atrasar o rush na rampa'],
+    molly:['Molotov do secreto','Fundo da sala de controle','Canto da parede, marca vermelha','Cobre o corredor do secreto',2,'CT','Cortar a passagem do secreto'],
+    he:['HE da ventilação','Dentro do duto, à esquerda','Quina da luz de emergência','Cai na saída do duto',1,'TR','Dar dano em quem vigia a saída']},
+  cache:{
+    smoke:['Smoke do mid','Spawn TR, atrás da pilastra','Caixa de gás distante, mira no topo','Bloqueia o meio e o ângulo do sniper',3,'TR','Atravessar o mid sem ser visto'],
+    flash:['Flash do pop alto','Corredor lateral, perto do trilho','Parte alta do letreiro','Explode sobre a plataforma',2,'TR','Entrar no bomb sem ser visto'],
+    molly:['Molotov do ninja do B','Saída do túnel, junto à caixa','Placa quebrada na parede','Queima o canto da plataforma',1,'CT','Tirar o plantador'],
+    he:['HE da escada','Meio da escada, à direita','Ponta da lâmpada amarela','Cai na base da escada',0,'CT','Dar dano no rush do TR']},
+  ancient:{
+    smoke:['Smoke do templo','Spawn TR, no degrau do meio','Topo da estátua, mira na cabeça','Bloqueia a visão do templo',3,'TR','Fechar o meio e tomar o bomb A'],
+    flash:['Flash da coluna','Atrás da coluna de pedra','Quina do arco superior','Explode sobre a coluna',1,'TR','Cegar o defensor da entrada'],
+    molly:['Molotov do canto B','Corredor da rampa, esquerda','Linha de musgo na parede','Queima o ângulo do plant',2,'TR','Tirar o inimigo do canto do B'],
+    he:['HE da escada','Alto da escada, centro','Cabo pendurado no teto','Cai na saída do túnel',4,'CT','Dar dano antes do plant']},
+  anubis:{
+    smoke:['Smoke do canal','Spawn TR, ao lado do portão','Ponta do obelisco, mira à direita','Fecha a visão do canal',3,'TR','Atravessar o canal com segurança'],
+    flash:['Flash da ponte','Início da ponte, rente à grade','Topo da torre ao fundo','Explode no outro lado da ponte',0,'TR','Cegar o defensor da ponte'],
+    molly:['Molotov do altar','Rampa lateral, canto direito','Hieróglifo mais alto da parede','Queima o altar',2,'CT','Tirar o inimigo do altar'],
+    he:['HE do portão','Entrada do portão, esquerda','Quina do pilar central','Cai na saída do portão',1,'CT','Danificar quem tenta forçar']},
+  vertigo:{
+    smoke:['Smoke do andaime','Spawn TR, borda da plataforma','Guindaste distante, mira no braço','Fecha o ângulo do andaime',4,'TR','Entrar no bomb A sem ser visto'],
+    flash:['Flash da laje','Escada lateral, perto do vão','Ponto claro da viga','Explode sobre a laje',1,'TR','Cegar quem segura a laje'],
+    molly:['Molotov do elevador','Corredor do elevador, esquerda','Marca branca no piso do teto','Queima a saída do elevador',2,'CT','Tirar o inimigo do elevador'],
+    he:['HE da rampa','Topo da rampa, direita','Linha do corrimão metálico','Cai na curva da rampa',0,'CT','Dar dano no rush de rampa']},
+  train:{
+    smoke:['Smoke do vagão','Spawn TR, atrás do trem','Topo do vagão vermelho, mira no centro','Fecha a visão do vagão',3,'TR','Plantar no bomb A com cobertura'],
+    flash:['Flash da passarela','Junto à lateral do vagão','Cabo elétrico mais alto','Explode sobre a passarela',0,'TR','Cegar o defensor da passarela'],
+    molly:['Molotov do ponto B','Entre dois vagões, canto esquerdo','Pichação azul na parede','Queima o plant do B',2,'CT','Tirar o plantador'],
+    he:['HE do pátio','Fim do pátio, direita','Ponta do poste de luz','Cai no meio do pátio',4,'CT','Dar dano no rush do TR']},
+  overpass:{
+    smoke:['Smoke do monstro','Spawn TR, perto da escada','Canto do prédio ao fundo, mira alta','Fecha o ângulo do monstro',3,'TR','Atravessar a ponte do B'],
+    flash:['Flash do banheiro','Esquina do túnel, direita','Letreiro verde do teto','Explode no banheiro',1,'TR','Entrar no bomb A sem tomar dano'],
+    molly:['Molotov do pilar','Escada do túnel, esquerda','Fresta entre os canos','Queima o canto do pilar',2,'CT','Tirar o inimigo do pilar'],
+    he:['HE da fonte','Beira da fonte, esquerda','Topo da árvore, mira à direita','Cai atrás da fonte',0,'CT','Dar dano em quem vigia a fonte']}
+};
+function exMapa(m,g){
+  const a = (EX_MAPA[m]||{})[g]; if(!a) return Object.assign({},EXEMPLOS[g]);
+  return {nome:a[0],posicao:a[1],mira:a[2],alvo:a[3],tecnica:TECNICAS[a[4]],lado:a[5],uso:a[6]};
+}
+// Lineups reais: LINEUPS.mirage.smoke = [ {nome:..., posicao:..., ...}, ... ]
+// Onde não houver nada, aparecem os EXEMPLOS marcados.
+const LINEUPS = {
+  // mirage: { smoke:[ {nome:'Smoke da janela', posicao:'...', mira:'...', alvo:'...', tecnica:'Jump throw', lado:'TR', uso:'...', img:'img/mirage-janela.jpg'} ] }
+};
+
+/* ====== RENDER ====== */
+const $ = (s,e=document)=>e.querySelector(s);
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let mapa = MAPAS[0].id, filtro = 'todas';
+
+function lista(m,g){
+  const l = (LINEUPS[m]||{})[g];
+  if(l && l.length) return l;
+  const ex = exMapa(m,g); ex.exemplo = true;
+  return [ex];
+}
+function card(l){
+  const foto = l.img ? `<img src="${esc(l.img)}" alt="${esc(l.nome)}" loading="lazy">` : 'Sua imagem aqui · captura da posição';
+  return `<article class="card">
+    <header><h3>${esc(l.nome)}</h3><div class="badges">
+      <span class="b ${esc(l.lado)}">${esc(l.lado)}</span>${l.exemplo?'<span class="b ex">Exemplo</span>':''}</div></header>
+    <div class="shot">${foto}</div>
+    <dl>
+      <div><dt>Posição</dt><dd>${esc(l.posicao)}</dd></div>
+      <div><dt>Mira</dt><dd>${esc(l.mira)}</dd></div>
+      <div><dt>Alvo</dt><dd>${esc(l.alvo)}</dd></div>
+      <div><dt>Técnica</dt><dd>${esc(l.tecnica)}</dd></div>
+      <div><dt>Lado</dt><dd>${l.lado==='TR'?'Terrorista (TR)':'Anti-terrorista (CT)'}</dd></div>
+      <div><dt>Para que serve</dt><dd>${esc(l.uso)}</dd></div>
+    </dl></article>`;
+}
+function render(){
+  const M = MAPAS.find(x=>x.id===mapa);
+  const gs = GRANADAS.filter(g=>filtro==='todas'||g.id===filtro);
+  $('#app').innerHTML = `
+    <div class="banner">${M.img?`<img src="${esc(M.img)}" alt="${esc(M.nome)}">`:`Foto do mapa ${esc(M.nome)} · placeholder`}</div>
+    <div class="mapname">${esc(M.nome)}</div>
+    <div class="gtabs">
+      ${[{id:'todas',nome:'Todas'},...GRANADAS].map(g=>`<button class="gtab" data-g="${g.id}" aria-pressed="${g.id===filtro}">${g.nome}</button>`).join('')}
+    </div>
+    ${gs.map(g=>`<section class="gr" id="${g.id}"><h2><i style="background:${g.cor}"></i>${g.nome} · ${esc(M.nome)}</h2>
+      ${lista(mapa,g.id).map(card).join('')}</section>`).join('')}`;
+  document.querySelectorAll('.gtab').forEach(b=>b.onclick=()=>{filtro=b.dataset.g;render()});
+}
+function tabs(){
+  $('#mapTabs').innerHTML = MAPAS.map(m=>`<button class="tab" role="tab" data-m="${m.id}" aria-selected="${m.id===mapa}">${m.nome}</button>`).join('');
+  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+    const x=$('#mapTabs').scrollLeft;
+    mapa=b.dataset.m; tabs(); render(); window.scrollTo({top:0});
+    const t=$('#mapTabs'); t.scrollLeft=x; $('.tab[aria-selected=true]').scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+  });
+}
+tabs(); render();
+
+/* arrastar com o mouse e roda do mouse na horizontal (no toque já funciona nativamente) */
+(()=>{
+  const t=$('#mapTabs'); let down=false,moved=false,sx=0,sl=0;
+  t.style.touchAction='pan-x'; t.style.cursor='grab';
+  t.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse')return; down=true;moved=false;sx=e.clientX;sl=t.scrollLeft; });
+  window.addEventListener('pointermove',e=>{ if(!down)return; const d=e.clientX-sx; if(Math.abs(d)>5){moved=true;t.style.cursor='grabbing';} if(moved)t.scrollLeft=sl-d; });
+  window.addEventListener('pointerup',()=>{ down=false; t.style.cursor='grab'; });
+  t.addEventListener('click',e=>{ if(moved){e.stopPropagation();e.preventDefault();moved=false;} },true);
+  const L=$('#arrL'),R=$('#arrR');
+  const upd=()=>{ L.classList.toggle('off',t.scrollLeft<8); R.classList.toggle('off',t.scrollLeft+t.clientWidth>=t.scrollWidth-8); };
+  t.addEventListener('scroll',upd,{passive:true}); window.addEventListener('resize',upd); upd();
+  L.onclick=()=>t.scrollBy({left:-200,behavior:'smooth'}); R.onclick=()=>t.scrollBy({left:200,behavior:'smooth'});
+  t.addEventListener('wheel',e=>{ if(Math.abs(e.deltaY)>Math.abs(e.deltaX)){ t.scrollLeft+=e.deltaY; e.preventDefault(); } },{passive:false});
+})();
+</script>
+</body>
+</html>
