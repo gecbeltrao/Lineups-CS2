@@ -236,13 +236,20 @@ function render(){
 function tabs(){
   const btn = m=>`<button class="tab" role="tab" data-m="${m.id}" aria-selected="${m.id===mapa}">${m.nome}</button>`;
   const achados = MAPAS.filter(m=>m.nome.toLowerCase().includes(busca));
-  $('#mapTabs').innerHTML = achados.map(btn).join('') || '<span class="vazio">Nenhum mapa encontrado</span>';
-  document.querySelectorAll('#mapTabs .tab').forEach(b=>b.onclick=()=>{
-    const x=$('#mapTabs').scrollLeft;
-    mapa=b.dataset.m; tabs(); render(); window.scrollTo({top:0});
-    const t=$('#mapTabs'); t.scrollLeft=x;
-    const s=t.querySelector('.tab[aria-selected=true]'); if(s) s.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
-  });
+  $('#mapTabs').innerHTML = (achados.map(btn).join('') || '<span class="vazio">Nenhum mapa encontrado</span>')
+    + '<button class="tab" id="mapaAleatorio">Aleatório</button>';
+  document.querySelectorAll('#mapTabs .tab[data-m]').forEach(b=>b.onclick=()=>abrir(b.dataset.m));
+  $('#mapaAleatorio').onclick=()=>{
+    const outros=MAPAS.filter(m=>m.id!==mapa);
+    busca=''; $('#buscaMapa').value='';
+    abrir(outros[Math.floor(Math.random()*outros.length)].id);
+  };
+}
+function abrir(id){
+  const x=$('#mapTabs').scrollLeft;
+  mapa=id; tabs(); render(); window.scrollTo({top:0});
+  const t=$('#mapTabs'); t.scrollLeft=x;
+  const s=t.querySelector('.tab[aria-selected=true]'); if(s) s.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
 }
 tabs(); render();
 
@@ -255,7 +262,7 @@ $('#buscaMapa').addEventListener('input',e=>{
 });
 $('#buscaMapa').addEventListener('keydown',e=>{
   if(e.key!=='Enter')return;
-  const b=$('#mapTabs .tab'); if(b) b.click();
+  const b=$('#mapTabs .tab[data-m]'); if(b) b.click();
 });
 
 /* arrastar com o mouse e roda do mouse na horizontal (no toque já funciona nativamente) */
