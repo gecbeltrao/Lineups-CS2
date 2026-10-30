@@ -35,6 +35,19 @@ nav{position:sticky;top:0;z-index:5;background:rgba(7,10,7,.96);border-bottom:1p
 @media(prefers-reduced-motion:reduce){.arr.r{animation:none}}
 .tab{flex:none;scroll-snap-align:center;font:inherit;font-weight:700;font-size:16px;letter-spacing:.5px;text-transform:uppercase;color:var(--mute);background:var(--panel);
   border:1px solid var(--line);padding:9px 18px;cursor:pointer;white-space:nowrap;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.tab{text-decoration:none}
+.busca{max-width:900px;margin:auto;padding:10px 16px 0}
+.busca input{width:100%;font:inherit;font-weight:600;color:var(--text);background:var(--panel);border:1px solid var(--line);padding:8px 12px;outline:0}
+.busca input::placeholder{color:var(--mute)}
+.busca input:focus{border-color:var(--green)}
+.vazio{color:var(--mute);font-weight:600;padding:9px 0;white-space:nowrap}
+@media(max-width:639px){
+  .busca input{min-height:44px}
+  .tab{min-height:44px}
+  .arr{height:44px;width:34px}
+  .arr.l{background:linear-gradient(270deg,transparent,#070a07 45%)}
+  .arr.r{background:linear-gradient(90deg,transparent,#070a07 45%)}
+}
 .tab[aria-selected=true]{background:var(--green);color:#071007;border-color:var(--green)}
 main{max-width:900px;margin:auto;padding:16px}
 .banner{height:120px;border:2px dashed var(--green-d);background:linear-gradient(135deg,var(--panel2),var(--panel));display:flex;align-items:center;justify-content:center;
@@ -63,18 +76,6 @@ dl div{border-top:1px solid var(--line);padding-top:7px}
 dt{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:700}
 dd{margin-top:1px}
 @media(min-width:640px){dl{grid-template-columns:1fr 1fr}.shot{margin:14px}}
-.faq{margin:6px 0 0}
-.faq h2{font-family:'Black Ops One',Impact,sans-serif;font-weight:400;font-size:22px;text-transform:uppercase;display:flex;align-items:center;gap:10px;
-  padding-bottom:6px;border-bottom:2px solid var(--green-d)}
-.faq h2 i{width:12px;height:12px;display:inline-block;transform:rotate(45deg);background:var(--green)}
-.faq details{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--green);margin-top:10px}
-.faq summary{cursor:pointer;list-style:none;padding:13px 40px 13px 14px;font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
-  background:var(--panel2);position:relative;-webkit-tap-highlight-color:transparent}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:'+';position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--green);font-size:26px;line-height:1}
-.faq details[open] summary::after{content:'−'}
-.faq details[open] summary{color:var(--green)}
-.faq details p{padding:12px 14px 14px;border-top:1px solid var(--line)}
 footer{max-width:900px;margin:30px auto;padding:0 16px;color:var(--mute);font-size:14px}
 code{color:var(--green)}
 </style>
@@ -84,52 +85,12 @@ code{color:var(--green)}
   <h1>Lineups <span>de Granada</span></h1>
   <p class="sub">Smokes, flashes, molotovs e HEs mapa a mapa: de onde jogar, onde mirar e para que serve cada um.</p>
 </header>
-<nav><div class="bar" role="tablist" aria-label="Mapas e FAQ">
+<nav><div class="busca"><input type="search" id="buscaMapa" placeholder="Pesquisar mapa..." aria-label="Pesquisar mapa" autocomplete="off"></div>
+<div class="bar" role="tablist" aria-label="Mapas">
   <div class="scrollwrap"><button class="arr l" id="arrL" aria-label="Mapas anteriores">‹</button><div class="tabs" id="mapTabs"></div><button class="arr r" id="arrR" aria-label="Mais mapas">›</button></div>
-  <div class="pin" id="pinTab"></div>
+  <div class="pin"><a class="tab" href="FAQ.html">FAQ</a></div>
 </div></nav>
 <main id="app"></main>
-<template id="faqTpl">
-<section class="faq" aria-labelledby="faqTitulo">
-  <h2 id="faqTitulo"><i></i>Perguntas frequentes</h2>
-  <details>
-    <summary>O que é um lineup?</summary>
-    <p>É um jeito repetível de jogar a granada: você fica sempre no mesmo ponto (posição), aponta para a mesma marca (mira) e usa a mesma técnica de lançamento. Assim ela cai no mesmo lugar toda vez.</p>
-  </details>
-  <details>
-    <summary>Qual a diferença entre clique esquerdo, direito e os dois?</summary>
-    <p>O clique esquerdo faz o arremesso mais forte e longo. O direito faz o mais curto e suave. Segurando os dois juntos, o arremesso fica com força média. Cada lineup indica qual usar, porque a força muda onde a granada cai.</p>
-  </details>
-  <details>
-    <summary>O que é jump throw?</summary>
-    <p>É soltar a granada no ponto mais alto do pulo. Isso deixa o arremesso consistente e um pouco mais longo. A maioria dos jogadores cria um bind para fazer tudo com uma tecla só (pular e soltar), em vez de depender do tempo do dedo.</p>
-  </details>
-  <details>
-    <summary>E o arremesso correndo?</summary>
-    <p>Ao correr, a granada herda a velocidade do seu movimento e vai mais longe. Nos lineups com "corrida", mantenha a mesma direção e solte no mesmo ponto sempre, senão o alcance varia.</p>
-  </details>
-  <details>
-    <summary>Como acerto a mira do lineup?</summary>
-    <p>Use um ponto fixo do cenário (quina, antena, rachadura, pichação) e centralize a mira nele. Confira também a posição exata dos pés, pois uma diferença pequena já muda onde a granada cai. Se errar, volte ao ponto de partida e repita sem mexer na sensibilidade.</p>
-  </details>
-  <details>
-    <summary>Como funciona a smoke?</summary>
-    <p>A smoke bloqueia a visão por alguns segundos. No CS2 ela ocupa um volume no espaço e pode ser aberta por tiros e explosões de HE. Também apaga o fogo do molotov que cair dentro dela.</p>
-  </details>
-  <details>
-    <summary>Como usar bem a flash?</summary>
-    <p>A flash deve estourar na frente ou acima do inimigo, no momento em que ele está olhando para você, para cegar de verdade. O "pop flash" explode quase no instante em que você sai da cobertura, deixando pouco tempo para o adversário virar.</p>
-  </details>
-  <details>
-    <summary>Para que serve o molotov?</summary>
-    <p>Cria uma área de fogo que causa dano e obriga o inimigo a sair do lugar. É muito usado para tirar defensores de posições fortes e para atrasar quem tenta plantar ou desarmar a bomba.</p>
-  </details>
-  <details>
-    <summary>Qual a diferença entre TR e CT nos lineups?</summary>
-    <p>TR (terrorista) é o lado que ataca e planta a bomba, então seus lineups costumam abrir caminho e dar cobertura. CT (anti-terrorista) defende os bombs, então usa granadas para atrasar, dar dano e retomar espaço.</p>
-  </details>
-</section>
-</template>
 
 <footer>
   Todo o conteúdo marcado como <b>EXEMPLO</b> é provisório. Edite o objeto <code>LINEUPS</code> no final do arquivo
@@ -146,7 +107,6 @@ const GRANADAS = [
 ];
 // img: coloque o caminho/URL da foto do mapa (deixe '' para o placeholder)
 const MAPAS = [
-  {id:'faq',      nome:'FAQ',      faq:true},  // aba de perguntas frequentes (não é mapa); fica fixa à direita da barra, sempre visível
   {id:'mirage',   nome:'Mirage',   img:''},
   {id:'inferno',  nome:'Inferno',  img:''},
   {id:'dust2',    nome:'Dust II',  img:''},
@@ -237,7 +197,7 @@ const LINEUPS = {
 /* ====== RENDER ====== */
 const $ = (s,e=document)=>e.querySelector(s);
 const esc = s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-let mapa = MAPAS.find(x=>!x.faq).id, filtro = 'todas';
+let mapa = MAPAS[0].id, filtro = 'todas', busca = '';
 
 function lista(m,g){
   const l = (LINEUPS[m]||{})[g];
@@ -262,7 +222,6 @@ function card(l){
 }
 function render(){
   const M = MAPAS.find(x=>x.id===mapa);
-  if(M.faq){ $('#app').innerHTML = ''; $('#app').appendChild($('#faqTpl').content.cloneNode(true)); return; }
   const gs = GRANADAS.filter(g=>filtro==='todas'||g.id===filtro);
   $('#app').innerHTML = `
     <div class="banner">${M.img?`<img src="${esc(M.img)}" alt="${esc(M.nome)}">`:`Foto do mapa ${esc(M.nome)} · placeholder`}</div>
@@ -276,9 +235,9 @@ function render(){
 }
 function tabs(){
   const btn = m=>`<button class="tab" role="tab" data-m="${m.id}" aria-selected="${m.id===mapa}">${m.nome}</button>`;
-  $('#mapTabs').innerHTML = MAPAS.filter(m=>!m.faq).map(btn).join('');
-  $('#pinTab').innerHTML = MAPAS.filter(m=>m.faq).map(btn).join('');   // FAQ fica fixa, fora da área que rola
-  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  const achados = MAPAS.filter(m=>m.nome.toLowerCase().includes(busca));
+  $('#mapTabs').innerHTML = achados.map(btn).join('') || '<span class="vazio">Nenhum mapa encontrado</span>';
+  document.querySelectorAll('#mapTabs .tab').forEach(b=>b.onclick=()=>{
     const x=$('#mapTabs').scrollLeft;
     mapa=b.dataset.m; tabs(); render(); window.scrollTo({top:0});
     const t=$('#mapTabs'); t.scrollLeft=x;
@@ -286,6 +245,18 @@ function tabs(){
   });
 }
 tabs(); render();
+
+/* pesquisa de mapa: filtra as abas ao digitar; Enter abre o primeiro resultado */
+$('#buscaMapa').addEventListener('input',e=>{
+  busca=e.target.value.trim().toLowerCase(); tabs();
+  const t=$('#mapTabs'), s=t.querySelector('.tab[aria-selected=true]');
+  if(s) t.scrollLeft=s.offsetLeft-(t.clientWidth-s.offsetWidth)/2;
+  t.dispatchEvent(new Event('scroll'));
+});
+$('#buscaMapa').addEventListener('keydown',e=>{
+  if(e.key!=='Enter')return;
+  const b=$('#mapTabs .tab'); if(b) b.click();
+});
 
 /* arrastar com o mouse e roda do mouse na horizontal (no toque já funciona nativamente) */
 (()=>{
